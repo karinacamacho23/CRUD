@@ -1,0 +1,91 @@
+<H1>Listado de Heroes</H1>
+<hr>
+
+<div class="row">
+	<div class="col text-right">
+		<button routerLink="/heroe/nuevo"
+				type="button" class="btn btn-outline-primary">
+		    <i class="fa fa-plus"></i>
+		     Agregar
+	    </button>
+	</div>
+</div>				
+<table class="table mt-3">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Poder</th>
+      <th scope="col">Vivo</th>
+      <th scope="col">Tools</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let heroe of heroess; let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{heroe.nombre}}</td>
+      <td>{{heroe.poder}}</td>
+      <td>
+
+      	<label *ngIf="heroe.vivo" class="badge badge-success">Vivo</label>
+      	<label *ngIf="!heroe.vivo" class="badge badge-danger">Muerto</label>
+
+      </td>
+      <td>
+      
+      	<button [routerLink]="['/heroe', heroe.id ]"
+                class="btn btn-info mr-1">
+      		<i class="fa fa-pencil"></i> 
+
+      	</button>
+<!-- 
+      	<button (click)="msj = true; heroets= heroe; i_ts=i" 
+                 class="btn btn-danger mr-1">
+      		<i class="fa fa-trash"></i>
+          
+      	</button>
+ -->     <button (click)="eliminarHeroe( heroe , i)" 
+                 class="btn btn-danger mr-1">
+          <i class="fa fa-trash"></i>
+          
+        </button>
+
+
+      </td>
+    </tr>
+
+   
+  </tbody>
+ </table>
+
+      <!-- mensaje -->
+<!--     <div *ngIf="msj == true" class="card float-rigth" style="width: 18rem;">
+        <div class="card-body text-center">
+          <h5 class="card-title">Desea Elimiar el herore?</h5>
+          
+          <button class="btn btn-ligth" (click)="eliminarHeroe()"><h6>Si</h6></button>
+          <button class="btn btn-ligth" (click)="msj = false"><h6>No</h6></button>
+        </div>
+    </div>
+    -->
+
+
+  	<!-- Loanding -->
+
+
+	<div *ngIf="cargar" class="alert alert-info text-center mt-3 ">
+		<h4 class="alert-heading"> Cargando </h4>
+		<p>
+			<i class="fa fa-spinner fa-spin fa-2x"></i>
+		</p>
+		<p class="mb-0">
+			Espere por favor
+		</p>
+	</div>
+	<!-- warning -->
+	<div *ngIf="noregistro" class="alert alert-warning text-center mt-3">
+		<h4 class="alert-heading"> No hay Registros </h4>
+		<p>
+			<i class="fa fa-spinner fa-exclamation fa-2x"></i>
+		</p>
+	</div>
